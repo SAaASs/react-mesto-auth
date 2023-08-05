@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import React, { useEffect } from "react";
 import { Login } from "./Login";
 import { Header } from "./Header";
@@ -10,6 +11,7 @@ import { authApi } from "../utils/AuthAPI";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [currentEmail, setCurrentEmail] = React.useState("");
+  const [isLoggining, setIsLoggining] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({
     about: "Неизвестный пользователь",
     avatar:
@@ -22,44 +24,48 @@ function App() {
 
   return (
     <>
-      <Header isLoggedIn={isLoggedIn} email={currentEmail} />
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/mesto-react"
-            element={
-              <ProtectedRouteElement
-                element={Home}
-                currentUser={currentUser}
-                setCurrentUser={setCurrentUser}
-                isLoggedIn={isLoggedIn}
-              />
-            }
-          />
-          <Route />
-          <Route
-            path="/sign-up"
-            element={
-              <Register
-                setCurrentUser={setCurrentUser}
-                currentUser={currentUser}
-                setIsLoggedIn={setIsLoggedIn}
-              />
-            }
-          />
-          <Route />
-          <Route
-            path="/sign-in"
-            element={
-              <Login
-                setCurrentEmail={setCurrentEmail}
-                setIsLoggedIn={setIsLoggedIn}
-              />
-            }
-          />
-          <Route />
-        </Routes>
-      </BrowserRouter>
+      <Header
+        isLoggining={isLoggining}
+        setIsLoggining={setIsLoggining}
+        setIsLoggedIn={setIsLoggedIn}
+        isLoggedIn={isLoggedIn}
+        email={currentEmail}
+      />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <ProtectedRouteElement
+              element={Home}
+              currentUser={currentUser}
+              setCurrentUser={setCurrentUser}
+              isLoggedIn={isLoggedIn}
+            />
+          }
+        />
+        <Route />
+        <Route
+          path="/sign-up"
+          element={
+            <Register
+              setCurrentUser={setCurrentUser}
+              currentUser={currentUser}
+            />
+          }
+        />
+        <Route />
+        <Route
+          path="/sign-in"
+          element={
+            <Login
+              setCurrentEmail={setCurrentEmail}
+              setIsLoggedIn={setIsLoggedIn}
+            />
+          }
+        />
+        <Route />
+        <Route path="*" element={<Navigate replace to="/" />} />
+      </Routes>
     </>
   );
 }

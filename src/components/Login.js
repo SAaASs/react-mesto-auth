@@ -18,7 +18,7 @@ export function Login({ setCurrentEmail, setIsLoggedIn }) {
         .authMe(localStorage.getItem("mestoReactToken"))
         .then((value) => {
           setCurrentEmail(value.data.email);
-          navigate("/mesto-react");
+          navigate("/");
           setIsLoggedIn(true);
         })
         .catch((err) => {
@@ -54,7 +54,7 @@ export function Login({ setCurrentEmail, setIsLoggedIn }) {
               })
               .then((value) => {
                 setCurrentEmail(value.data.email);
-                navigate("/mesto-react");
+                navigate("/");
                 setIsLoggedIn(true);
               })
               .catch((err) => {
@@ -76,6 +76,7 @@ export function Login({ setCurrentEmail, setIsLoggedIn }) {
                 noValidate
                 minLength="2"
                 maxLength="40"
+                type="email"
                 required
                 value={emailValue}
                 onChange={handleEmailChange}
@@ -86,6 +87,7 @@ export function Login({ setCurrentEmail, setIsLoggedIn }) {
                 placeholder="Пароль"
                 className="register__input"
                 noValidate
+                type="password"
                 minLength="2"
                 maxLength="40"
                 required

@@ -2,7 +2,7 @@ import { authApi } from "../utils/AuthAPI";
 import { AuthPopup } from "./AuthPopup";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-export function Register({ currentUser, setCurrentUser, setIsLoggedIn }) {
+export function Register({ currentUser, setCurrentUser }) {
   const [passwordValue, setPasswordValue] = React.useState("");
   const [emailValue, setEmailValue] = React.useState("");
   const [ansType, setAnsType] = React.useState(false);
@@ -39,7 +39,6 @@ export function Register({ currentUser, setCurrentUser, setIsLoggedIn }) {
                 setIsAuthPopupOpened(true);
                 currentUser._id = value.data._id;
                 setCurrentUser(currentUser);
-                setIsLoggedIn(true);
                 setTimeout(() => {
                   navigate("/sign-in");
                 }, "1000");
@@ -67,6 +66,7 @@ export function Register({ currentUser, setCurrentUser, setIsLoggedIn }) {
                 noValidate
                 minLength="2"
                 maxLength="40"
+                type="email"
                 required
                 value={emailValue}
                 onChange={handleEmailChange}
@@ -79,6 +79,7 @@ export function Register({ currentUser, setCurrentUser, setIsLoggedIn }) {
                 noValidate
                 minLength="2"
                 maxLength="40"
+                type="password"
                 required
                 value={passwordValue}
                 onChange={handlePasswordChange}
@@ -90,6 +91,17 @@ export function Register({ currentUser, setCurrentUser, setIsLoggedIn }) {
             Зарегистрироваться
           </button>
         </form>
+        <div className="register__question">
+          Уже зарегистрированы?
+          <button
+            className="header__button"
+            onClick={() => {
+              navigate("/sign-in");
+            }}
+          >
+            Войти
+          </button>
+        </div>
       </div>
     </>
   );

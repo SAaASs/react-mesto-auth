@@ -6,3 +6,6 @@
   padding: 0;
   padding-left: 24px;
 }
+.header__button:hover {
+  cursor: pointer;
+}

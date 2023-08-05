@@ -48,9 +48,16 @@ export function Home({ currentUser, setCurrentUser }) {
 
   function handleCardLike(card) {
     const isLiked = card?.likes?.some((i) => i._id === currentUser?._id);
-    api.updateLike(card._id, isLiked).then((newCard) => {
-      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
-    });
+    api
+      .updateLike(card._id, isLiked)
+      .then((newCard) => {
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
   function handleCardDelete(card) {
     return api.deleteCard(card._id);

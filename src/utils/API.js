@@ -5,7 +5,7 @@ export class API {
   }
   _checkResponse(res) {
     if (res.ok) {
-      let resu = res.json();
+      const resu = res.json();
       console.log(resu);
       return resu;
     }
