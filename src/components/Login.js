@@ -12,20 +12,7 @@ export function Login({ setCurrentEmail, setIsLoggedIn }) {
     setEmailValue("");
     setPasswordValue("");
   }, []);
-  React.useEffect(() => {
-    if (localStorage.getItem("mestoReactToken")) {
-      authApi
-        .authMe(localStorage.getItem("mestoReactToken"))
-        .then((value) => {
-          setCurrentEmail(value.data.email);
-          navigate("/");
-          setIsLoggedIn(true);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, []);
+
   function handleEmailChange(e) {
     setEmailValue(e.target.value);
   }

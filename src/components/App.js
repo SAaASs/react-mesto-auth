@@ -12,6 +12,21 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [currentEmail, setCurrentEmail] = React.useState("");
   const [isLoggining, setIsLoggining] = React.useState(false);
+  const navigate = useNavigate();
+  React.useEffect(() => {
+    if (localStorage.getItem("mestoReactToken")) {
+      authApi
+        .authMe(localStorage.getItem("mestoReactToken"))
+        .then((value) => {
+          setCurrentEmail(value.data.email);
+          navigate("/");
+          setIsLoggedIn(true);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, []);
   const [currentUser, setCurrentUser] = React.useState({
     about: "Неизвестный пользователь",
     avatar:
