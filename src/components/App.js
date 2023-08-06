@@ -44,7 +44,8 @@ function App() {
         setIsLoggining={setIsLoggining}
         setIsLoggedIn={setIsLoggedIn}
         isLoggedIn={isLoggedIn}
-        email={currentEmail}
+        currentEmail={currentEmail}
+        setCurrentEmail={setCurrentEmail}
       />
       <Routes>
         <Route

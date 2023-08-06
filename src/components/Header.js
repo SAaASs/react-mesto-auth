@@ -3,20 +3,22 @@ export function Header({
   isLoggining,
   setIsLoggining,
   setIsLoggedIn,
-  email,
+  currentEmail,
   isLoggedIn,
+  setCurrentEmail,
 }) {
   const navigate = useNavigate();
   return (
     <header className="header">
       <div className="header__logo"></div>
       <div className="header__right">
-        <div className="header__email">{email}</div>
+        <div className="header__email">{currentEmail}</div>
         {isLoggedIn ? (
           <button
             onClick={() => {
               localStorage.removeItem("mestoReactToken");
               setIsLoggedIn(false);
+              setCurrentEmail("");
             }}
             className="header__button"
           >
